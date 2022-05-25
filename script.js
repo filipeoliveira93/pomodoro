@@ -11,29 +11,24 @@ let longBreak = document.querySelector(".longBreak");
 play.addEventListener("click", playFunc);
 reset.addEventListener("click", resetFunc);
 work.addEventListener("click", workFunc);
-// shortBreak.addEventListener("click", shortBreakFunc);
-// longBreak.addEventListener("click", longBreakFunc);
+shortBreak.addEventListener("click", shortBreakFunc);
+longBreak.addEventListener("click", longBreakFunc);
 
 minutes.innerHTML = Math.floor(currentTime / 60);
 seconds.innerHTML = currentTime % 60 > 9 ? currentTime % 60 : "0" + (currentTime % 60);
 
 var playconditon = true;
 
-function ativPlay() {
-	play.addEventListener("click", playFunc);
-	play.removeEventListener("click", pauseFunc);
-	play.innerHTML = "play";
-}
-function ativPause() {
-	play.removeEventListener("click", playFunc);
-	play.addEventListener("click", pauseFunc);
-	play.innerHTML = "pause";
+function activate(domobject, functionadd, functionremove, string) {
+	domobject.addEventListener("click", functionadd);
+	domobject.removeEventListener("click", functionremove);
+	domobject.innerHTML = string;
+	console.log(string);
 }
 
 function numberverify() {
 	minutes.innerHTML = Math.floor(currentTime / 60);
-	seconds.innerHTML =
-		currentTime % 60 > 9 ? currentTime % 60 : "0" + (currentTime % 60);
+	seconds.innerHTML = currentTime % 60 > 9 ? currentTime % 60 : "0" + (currentTime % 60);
 }
 
 function timer() {
@@ -45,58 +40,55 @@ function timer() {
 	}
 }
 
-function pauseFunc() {
-	console.log("pause ativado");
-	playconditon = false;
-	ativPlay();
-}
-
 function playFunc() {
 	playconditon = true;
 	timer();
-	ativPause();
+	activate(play, pauseFunc, playFunc, "pause");
+}
+
+function pauseFunc() {
+	console.log("pause ativado");
+	playconditon = false;
+	activate(play, playFunc, pauseFunc, "pause");
 }
 
 function resetFunc() {
 	currentTime = 1500;
 	numberverify();
-	playconditon = false;
-	ativPlay();
+	playconditon = false
+	activate(play, playFunc, pauseFunc, 'play');
 }
 
 function workFunc() {
-	work.classList.add("active");
-	shortBreak.classList.remove("active");
-	longBreak.classList.remove("active");
+	classrename(work, shortBreak, longBreak, "active");
 	currentTime = 1500;
-    console.log("work");
+	console.log("work");
 	numberverify();
 	playconditon = false;
-	ativPlay();
+	activate(play, playFunc, pauseFunc,"play");
+}
+
+function classrename(domactive, domremove1, domremove2, classname) {
+	domactive.classList.add(classname);
+	domremove1.classList.remove(classname);
+	domremove2.classList.remove(classname);
 }
 
 function shortBreakFunc() {
-    work.classList.remove("active");
-    shortBreak.classList.add("active");
-    longBreak.classList.remove("active");
-    currentTime = 300;
-    console.log("shortBreak");
-    numberverify();
-    playconditon = false;
-    ativPlay();
+	classrename(shortBreak, longBreak, work, "active");
+	activate(play, playFunc, pauseFunc,"play");
+	currentTime = 300;
+	console.log("shortBreak");
+	numberverify();
+	playconditon = false;
 }
 
 function longBreakFunc() {
-    work.classList.remove("active");
-    shortBreak.classList.remove("active");
-    longBreak.classList.add("active");
-    currentTime = 900;
-    console.log("longBreak");
-    numberverify();
-    playconditon = false;
-    ativPlay();
+	classrename(longBreak, shortBreak, work, "active");
+	activate(play, playFunc, pauseFunc,"play");
+	currentTime = 900;
+	console.log("longBreak");
+	numberverify();
+	playconditon = false;
 }
-
-
-
 

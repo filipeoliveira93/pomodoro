@@ -1,6 +1,8 @@
 @import "/reset.css";
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+/* #FF5252 */
+/* #19FF81 */
 
 body {
     background: #353436;
@@ -28,7 +30,22 @@ body {
 
 }
 
+.buttons button {
+    background: #353436;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    width: 60px;
+    height: 60px;
+    border: 1px solid #ffffff;
+}
+
 .active {
-    background: #ffffff;
+    background: #bb3030;
     color: rgb(0, 0, 0);
+    
 }
