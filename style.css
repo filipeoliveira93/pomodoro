@@ -3,6 +3,7 @@
 
 /* #FF5252 */
 /* #19FF81 */
+/* #54F62F */
 
 body {
     background: #353436;
@@ -17,20 +18,22 @@ body {
     height: 100vh;
     flex-direction: column;
 }
-.buttons{
+/* .buttons{
     background: #353436;
     color: rgb(255, 255, 255);
     font-size: 14px;
     font-weight: bold;
     border-radius: 5px;
     padding: 10px;
-    transition: all 0.3s ease;
+    transition: all 2s ease;
     margin-top: 20px;
-    
-
+    ;
 }
+     */
 
-.buttons button {
+
+
+/* .buttons button {
     background: #353436;
     color: rgb(255, 255, 255);
     font-size: 14px;
@@ -42,7 +45,8 @@ body {
     width: 60px;
     height: 60px;
     border: 1px solid #ffffff;
-}
+} */
+
 
 .active {
     background: #bb3030;

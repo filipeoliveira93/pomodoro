@@ -19,10 +19,18 @@ seconds.innerHTML = currentTime % 60 > 9 ? currentTime % 60 : "0" + (currentTime
 
 var playconditon = true;
 
+function changeImg(object, caminhoimg){
+	// console.log(object);
+	let img = document.querySelector(object)
+	img.src = caminhoimg;
+
+}
+
+
 function activate(domobject, functionadd, functionremove, string) {
 	domobject.addEventListener("click", functionadd);
 	domobject.removeEventListener("click", functionremove);
-	domobject.innerHTML = string;
+	// domobject.innerHTML = string;
 	console.log(string);
 }
 
@@ -44,12 +52,15 @@ function playFunc() {
 	playconditon = true;
 	timer();
 	activate(play, pauseFunc, playFunc, "pause");
+	changeImg('.playPause', 'assets/pause.png');
+
 }
 
 function pauseFunc() {
 	console.log("pause ativado");
 	playconditon = false;
 	activate(play, playFunc, pauseFunc, "pause");
+	changeImg('.playPause', 'assets/play.png');
 }
 
 function resetFunc() {
@@ -57,6 +68,12 @@ function resetFunc() {
 	numberverify();
 	playconditon = false
 	activate(play, playFunc, pauseFunc, 'play');
+}
+
+function classrename(domactive, domremove1, domremove2, classname) {
+	domactive.classList.add(classname);
+	domremove1.classList.remove(classname);
+	domremove2.classList.remove(classname);
 }
 
 function workFunc() {
@@ -67,13 +84,6 @@ function workFunc() {
 	playconditon = false;
 	activate(play, playFunc, pauseFunc,"play");
 }
-
-function classrename(domactive, domremove1, domremove2, classname) {
-	domactive.classList.add(classname);
-	domremove1.classList.remove(classname);
-	domremove2.classList.remove(classname);
-}
-
 function shortBreakFunc() {
 	classrename(shortBreak, longBreak, work, "active");
 	activate(play, playFunc, pauseFunc,"play");
@@ -92,3 +102,19 @@ function longBreakFunc() {
 	playconditon = false;
 }
 
+
+
+let janta = ['cenoura', 'arroz', 'batata', 'frango', 'feijao', 'macarrao', 'carne', 'peixe', 'pizza', 'salgado', 'sopa', 'suco', 'vegetariano', 'vegano']
+let filtrado = [];
+function busca(letra, palavra) {
+	let marcador = false;
+	for (letra of palavra) {
+
+		if(palavra.includes(letra)) {
+			marcador = true;
+		}
+	}
+	return console.log(marcador);
+}
+
+busca('b', 'batata')
