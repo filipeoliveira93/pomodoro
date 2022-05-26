@@ -1,3 +1,4 @@
+
 let minutes = document.querySelector(".minutes");
 let seconds = document.querySelector(".seconds");
 let play = document.querySelector(".start");
@@ -15,17 +16,16 @@ shortBreak.addEventListener("click", shortBreakFunc);
 longBreak.addEventListener("click", longBreakFunc);
 
 minutes.innerHTML = Math.floor(currentTime / 60);
-seconds.innerHTML = currentTime % 60 > 9 ? currentTime % 60 : "0" + (currentTime % 60);
+seconds.innerHTML =
+	currentTime % 60 > 9 ? currentTime % 60 : "0" + (currentTime % 60);
 
 var playconditon = true;
 
-function changeImg(object, caminhoimg){
+function changeImg(object, caminhoimg) {
 	// console.log(object);
-	let img = document.querySelector(object)
+	let img = document.querySelector(object);
 	img.src = caminhoimg;
-
 }
-
 
 function activate(domobject, functionadd, functionremove, string) {
 	domobject.addEventListener("click", functionadd);
@@ -36,7 +36,8 @@ function activate(domobject, functionadd, functionremove, string) {
 
 function numberverify() {
 	minutes.innerHTML = Math.floor(currentTime / 60);
-	seconds.innerHTML = currentTime % 60 > 9 ? currentTime % 60 : "0" + (currentTime % 60);
+	seconds.innerHTML =
+		currentTime % 60 > 9 ? currentTime % 60 : "0" + (currentTime % 60);
 }
 
 function timer() {
@@ -52,22 +53,21 @@ function playFunc() {
 	playconditon = true;
 	timer();
 	activate(play, pauseFunc, playFunc, "pause");
-	changeImg('.playPause', 'assets/pause.png');
-
+	changeImg(".playPause", "assets/pause.png");
 }
 
 function pauseFunc() {
 	console.log("pause ativado");
 	playconditon = false;
 	activate(play, playFunc, pauseFunc, "pause");
-	changeImg('.playPause', 'assets/play.png');
+	changeImg(".playPause", "assets/play.png");
 }
 
 function resetFunc() {
 	currentTime = 1500;
 	numberverify();
-	playconditon = false
-	activate(play, playFunc, pauseFunc, 'play');
+	playconditon = false;
+	activate(play, playFunc, pauseFunc, "play");
 }
 
 function classrename(domactive, domremove1, domremove2, classname) {
@@ -82,11 +82,11 @@ function workFunc() {
 	console.log("work");
 	numberverify();
 	playconditon = false;
-	activate(play, playFunc, pauseFunc,"play");
+	activate(play, playFunc, pauseFunc, "play");
 }
 function shortBreakFunc() {
 	classrename(shortBreak, longBreak, work, "active");
-	activate(play, playFunc, pauseFunc,"play");
+	activate(play, playFunc, pauseFunc, "play");
 	currentTime = 300;
 	console.log("shortBreak");
 	numberverify();
@@ -95,7 +95,7 @@ function shortBreakFunc() {
 
 function longBreakFunc() {
 	classrename(longBreak, shortBreak, work, "active");
-	activate(play, playFunc, pauseFunc,"play");
+	activate(play, playFunc, pauseFunc, "play");
 	currentTime = 900;
 	console.log("longBreak");
 	numberverify();
@@ -103,18 +103,23 @@ function longBreakFunc() {
 }
 
 
+let progressbar = document.querySelector('.progress-circular');
+let valueContainer = document.querySelector('.value-container');
 
-let janta = ['cenoura', 'arroz', 'batata', 'frango', 'feijao', 'macarrao', 'carne', 'peixe', 'pizza', 'salgado', 'sopa', 'suco', 'vegetariano', 'vegano']
-let filtrado = [];
-function busca(letra, palavra) {
-	let marcador = false;
-	for (letra of palavra) {
+let progressValue = 0;
+let progressEndValue = 100;
+let speed = 50;
 
-		if(palavra.includes(letra)) {
-			marcador = true;
-		}
-	}
-	return console.log(marcador);
-}
-
-busca('b', 'batata')
+let progress = setInterval( () =>
+{
+    progressValue ++;
+    valueContainer.textContent = `${progressValue}`;
+    progressbar.style.background = `conic-gradient(
+        #3eff68 ${progressValue * 3.6}deg,
+        #ff3a54 ${progressValue * 3.6}deg)`;
+    if(progressValue == progressEndValue)
+    {
+        clearInterval(progress)
+    }
+    
+}, speed);
